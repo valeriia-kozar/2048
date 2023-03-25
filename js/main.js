@@ -3,6 +3,21 @@ import { Tile } from './tile.js';
 
 const gameBoard = document.getElementById('game-board');
 
+const touch = {
+    panup: 'ArrowUp',
+    panright: 'ArrowRight',
+    panleft: 'ArrowLeft',
+    pandown: 'ArrowDown' 
+}
+
+
+var hammertime = new Hammer(gameBoard);
+hammertime.on('panleft panright panup pandown', function(ev) {
+    console.log(ev);
+    handleInput({key: touch[ev.type]});
+});
+
+
 const grid = new Grid(gameBoard);
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
